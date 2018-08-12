@@ -1,0 +1,58 @@
+﻿<Window x:Class="LoginSystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Messenger" ResizeMode="NoResize" Height="370" Width="500" WindowStartupLocation="CenterScreen" Background="LightSkyBlue" Icon="C:\Users\Егор\Desktop\messenger.ico">
+    <Grid>
+        <Border Background="White" Margin="100 30 100 70" CornerRadius="12">
+            <Border.RenderTransform>
+                <RotateTransform x:Name="transform"/>
+            </Border.RenderTransform>
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="LightSeaGreen"/>
+            </Border.Effect>
+            <StackPanel Margin="20" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Vertical">
+                <TextBlock Text="Sign Up" Foreground="Aqua" FontSize="25" HorizontalAlignment="Center"/>
+                <Grid Margin="0 30 0 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <Grid Style="{StaticResource EntryFieldStyle}">
+                            <TextBlock x:Name="tLogin" Text="Login" Height ="30" Width="200" FontSize="18" Padding="5 0 0 0" Foreground="LightSlateGray" Visibility="{Binding ElementName=txtLogin, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                            <TextBox x:Name="txtLogin" BorderBrush="LightSlateGray" BorderThickness="0 0 0 1" Height ="30" Width="200" FontSize="18" Background="Transparent" MaxLength="10"/>
+                        </Grid>
+                        <TextBlock x:Name="warning" ToolTip="Incorrect login or password." Opacity="0" Margin="10 0 0 0" Padding="0 6 0 0" Text="&#xE783;" FontFamily="Segoe MDL2 Assets" Foreground="Red" FontSize="18"/>
+                    </StackPanel>
+                </Grid>
+                <StackPanel Margin="0 10 0 0" Orientation="Horizontal">
+                    <Grid Style="{StaticResource EntryFieldStyle}">
+                        <PasswordBox x:Name="txtPassword" BorderBrush="LightSlateGray" BorderThickness="0 0 0 1" Height ="30" Width="200" FontSize="18" MaxLength="15"/>
+                        <TextBox x:Name="showPass" Height ="30" Width="200" BorderThickness="0 0 0 1" BorderBrush="LightSlateGray" Foreground="Black" MaxLength="15" FontSize="18" Visibility="Collapsed"/>
+                    </Grid>
+                    <Button x:Name="passShow" Style="{StaticResource eye}" Margin="9 5 0 0" ToolTip="Show password."/>
+                </StackPanel>
+                <Button Content="Submit" Style="{StaticResource subButton}" Click="Submit_Click">
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard>
+                                <Storyboard FillBehavior="Stop">
+                                    <DoubleAnimation Storyboard.TargetName="transform"
+                                             Storyboard.TargetProperty="Angle"
+                                             From="4"
+                                             Duration="0:0:0.5">
+                                        <DoubleAnimation.EasingFunction>
+                                            <ElasticEase EasingMode="EaseOut"
+                                                 Oscillations="1"
+                                                 Springiness="2" />
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
+            </StackPanel>
+        </Border>
+        <Button Style="{StaticResource regButton}" Click="Registr_Click"/>
+    </Grid>
+</Window>
